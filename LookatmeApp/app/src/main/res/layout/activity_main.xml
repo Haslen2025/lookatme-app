@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#F5F6FA">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lookatme"
+        android:textSize="24sp"
+        android:textColor="#0984E3"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="微信消息监护服务"
+        android:textSize="14sp"
+        android:textColor="#636E72"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Server address input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="服务器地址"
+        android:textSize="14sp"
+        android:textColor="#2D3436"
+        android:layout_marginBottom="4dp"/>
+
+    <EditText
+        android:id="@+id/serverUrl"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:hint="例如: http://192.168.1.100:5000"
+        android:textSize="14sp"
+        android:background="@drawable/edit_bg"
+        android:padding="12dp"
+        android:inputType="textUri"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:text="保存地址"
+            android:textSize="14sp"
+            android:backgroundTint="#0984E3"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/testBtn"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:text="测试连接"
+            android:textSize="14sp"
+            android:backgroundTint="#00B894"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Status display -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⚪ 未开始"
+        android:textSize="16sp"
+        android:textColor="#636E72"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/countText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="待同步: 0 条"
+        android:textSize="14sp"
+        android:textColor="#636E72"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Authorization button -->
+    <Button
+        android:id="@+id/authBtn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="授权通知监听权限"
+        android:textSize="14sp"
+        android:backgroundTint="#E17055"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="需要先授权才能监听微信消息通知"
+        android:textSize="11sp"
+        android:textColor="#B2BEC3"
+        android:gravity="center"/>
+
+</LinearLayout>

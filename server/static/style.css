@@ -1,0 +1,41 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f5f6fa; color: #2d3436; }
+
+header { background: #0984e3; color: #fff; padding: 16px 24px; display: flex; align-items: center; gap: 16px; }
+header h1 { font-size: 20px; }
+.status { font-size: 12px; opacity: 0.8; }
+
+.toolbar { display: flex; align-items: center; gap: 8px; padding: 12px 24px; background: #fff; border-bottom: 1px solid #dfe6e9; }
+.toolbar input[type="text"] { flex: 1; max-width: 300px; padding: 6px 12px; border: 1px solid #dfe6e9; border-radius: 6px; font-size: 14px; }
+.toolbar input[type="date"] { padding: 6px 12px; border: 1px solid #dfe6e9; border-radius: 6px; font-size: 14px; }
+.toolbar button { padding: 6px 12px; border: 1px solid #dfe6e9; border-radius: 6px; background: #fff; cursor: pointer; font-size: 13px; }
+.toolbar button:hover { background: #f0f0f0; }
+.count { margin-left: auto; font-size: 13px; color: #636e72; }
+
+#messages { max-width: 720px; margin: 0 auto; padding: 16px; }
+
+.date-group { font-size: 12px; color: #b2bec3; padding: 12px 0 8px; font-weight: 600; letter-spacing: 1px; }
+
+.msg-card { display: flex; gap: 12px; padding: 12px 16px; background: #fff; border-radius: 10px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.msg-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: #0984e3; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; flex-shrink: 0; }
+
+.body { flex: 1; min-width: 0; }
+.sender { font-size: 14px; font-weight: 600; color: #2d3436; margin-bottom: 2px; }
+.content { font-size: 15px; color: #2d3436; line-height: 1.5; word-break: break-all; }
+.time { font-size: 11px; color: #b2bec3; margin-top: 4px; }
+
+.empty { text-align: center; color: #b2bec3; padding: 40px 0; font-size: 14px; }
+
+.pagination { text-align: center; padding: 16px; }
+.pagination button { padding: 6px 16px; border: 1px solid #dfe6e9; border-radius: 6px; background: #fff; cursor: pointer; font-size: 13px; }
+.pagination button:hover { background: #f0f0f0; }
+.page-info { margin: 0 12px; font-size: 13px; color: #636e72; }
+
+@media (max-width: 600px) {
+    header { padding: 12px 16px; }
+    .toolbar { flex-wrap: wrap; padding: 8px 16px; }
+    .toolbar input[type="text"] { max-width: 100%; flex: 1 1 100%; }
+    #messages { padding: 12px; }
+}

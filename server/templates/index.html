@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lookatme - 消息监护</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>📋 Lookatme</h1>
+        <div class="status" id="status">🟢 服务器运行中</div>
+    </header>
+
+    <div class="toolbar">
+        <input type="text" id="searchBox" placeholder="搜索发送人或消息内容..." oninput="doSearch()">
+        <input type="date" id="dateFilter" onchange="doSearch()">
+        <button onclick="clearDate()">清除日期</button>
+        <span class="count" id="count">共 0 条</span>
+    </div>
+
+    <div id="messages"></div>
+    <div class="pagination" id="pagination"></div>
+
+    <script>
+        var currentPage = 1;
+        var currentQ = '';
+        var currentDate = '';
+
+        function loadMessages(page) {
+            currentPage = page;
+            var params = 'page=' + page + '&per_page=50';
+            if (currentQ) params += '&q=' + encodeURIComponent(currentQ);
+            if (currentDate) params += '&date=' + currentDate;
+
+            fetch('/api/messages?' + params)
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    document.getElementById('count').textContent = '共 ' + data.total + ' 条';
+                    var html = '';
+                    var lastDate = '';
+                    data.messages.forEach(function(m) {
+                        var d = m.msg_time.substring(0, 10);
+                        if (d !== lastDate) {
+                            html += '<div class="date-group">' + d + '</div>';
+                            lastDate = d;
+                        }
+                        var avatar = m.sender.charAt(0);
+                        html += '<div class="msg-card">' +
+                            '<div class="avatar">' + avatar + '</div>' +
+                            '<div class="body">' +
+                                '<div class="sender">' + escapeHtml(m.sender) + '</div>' +
+                                '<div class="content">' + escapeHtml(m.content) + '</div>' +
+                                '<div class="time">' + m.msg_time + '</div>' +
+                            '</div>' +
+                        '</div>';
+                    });
+                    if (data.messages.length === 0) {
+                        html = '<div class="empty">暂无消息</div>';
+                    }
+                    document.getElementById('messages').innerHTML = html;
+                    renderPagination(data.total, data.page);
+                });
+        }
+
+        function renderPagination(total, page) {
+            var totalPages = Math.ceil(total / 50);
+            if (totalPages <= 1) {
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+            var html = '';
+            if (page > 1) html += '<button onclick="loadMessages(' + (page-1) + ')">‹ 上一页</button>';
+            html += '<span class="page-info">第 ' + page + ' / ' + totalPages + ' 页</span>';
+            if (page < totalPages) html += '<button onclick="loadMessages(' + (page+1) + ')">下一页 ›</button>';
+            document.getElementById('pagination').innerHTML = html;
+        }
+
+        function doSearch() {
+            currentQ = document.getElementById('searchBox').value;
+            currentDate = document.getElementById('dateFilter').value;
+            loadMessages(1);
+        }
+
+        function clearDate() {
+            document.getElementById('dateFilter').value = '';
+            doSearch();
+        }
+
+        function escapeHtml(s) {
+            if (!s) return '';
+            return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        }
+
+        // Auto refresh every 5 seconds
+        setInterval(function() {
+            loadMessages(currentPage);
+        }, 5000);
+
+        loadMessages(1);
+    </script>
+</body>
+</html>
